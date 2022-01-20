@@ -1,6 +1,6 @@
 version(1);
 
-project_name = "name of project";
+project_name = "hello world";
 
 patterns = {
 	"*.c",
@@ -33,10 +33,31 @@ command_list = {
 		.save_dirty_files = true,
 		.cursor_at_end = false,
 		.cmd = {
-			{ "gcc main.c -o build && build.exe", .os = "win" },
+			{ "gcc -std=c99 -pedantic main.c -o build && build.exe", .os = "win" },
+		},
+	},
+	{
+		.name = "build",
+		.out = "*compilation*",
+		.footer_panel = true,
+		.save_dirty_files = true,
+		.cursor_at_end = false,
+		.cmd = {
+			{ "gcc -std=c99 -pedantic main.c -o build", .os = "win" },
+		},
+	},
+	{
+		.name = "clean",
+		.out = "*compilation*",
+		.footer_panel = true,
+		.save_dirty_files = true,
+		.cursor_at_end = false,
+		.cmd = {
+			{ "del /f build.exe", .os = "win" },
 		},
 	},
 };
 
+fkey_command[1] = "build";
+fkey_command[2] = "clean";
 fkey_command[5] = "build_run";
-
